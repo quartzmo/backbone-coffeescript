@@ -1,0 +1,7 @@
+<h1>Suggestions</h1>
+<script>
+
+  var suggestions = new Backbone.Collection;
+  suggestions.reset(<%= json_escape @suggestions.to_json.html_safe %>);
+
+</script>

@@ -9,5 +9,5 @@
 Suggestion.create!([
                        {subject: "Is this awesome or what?!", message: "That is all."},
                        {subject: "More Backbone 1234!", message: "+1"},
-                       {subject: "jfhsjd", message: "djhvksjhfjds"}
+                       {subject: "XSS test", message: "<script>alert('Malicious code');</script>"}
                    ])

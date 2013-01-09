@@ -1,4 +1,4 @@
 backbone-coffeescript-book-examples
 ===================================
 
-Code example from the interactive Backbone + CoffeeScript book.
+Code examples from the interactive [Backbone + CoffeeScript book](http://www.scriptybooks.com/books/backbone-coffeescript).

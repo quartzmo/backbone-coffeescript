@@ -1,7 +1,9 @@
 <h1>Suggestions</h1>
+<div id="suggestions"></div>
 <% content_for(:inline_javascript) do %>
   <script>
-    var suggestions = new Backbone.Collection;
+    var suggestions = new Feedback.Suggestions;
     suggestions.reset(<%= json_escape @suggestions.to_json.html_safe %>);
+    $('#suggestions').html(new Feedback.IndexView({collection: suggestions}).render().el);
   </script>
 <% end %>

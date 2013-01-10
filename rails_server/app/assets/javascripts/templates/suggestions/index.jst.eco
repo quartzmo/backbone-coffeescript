@@ -1,0 +1,12 @@
+<ol>
+  <%= @collection.each (item) ->: %>
+    <li>
+      <a href="#/show/<%= item.id %>">
+        <%= item.get('subject') %>
+      </a>
+    </li>
+  <% end %>
+</ol>
+<a href="#/new" class="btn btn-primary">
+  New Suggestion
+</a>

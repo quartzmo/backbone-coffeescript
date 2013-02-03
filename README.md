@@ -5,13 +5,13 @@ Code examples from the interactive [Backbone + CoffeeScript](http://www.scriptyb
 
 ## Build
 
-Each chapter directory already contains the generated JavaScript output from the CoffeeScript and Eco template files. However, you can use the `Makefile` contained within each chapter directory to rebuild after making any changes. On the command line, simply navigate to the chapter directory and enter `make`. See the `Makefile` for convenient watch targets.
+Each chapter directory already contains the generated JavaScript output from the CoffeeScript and Eco template files. However, you can use the Makefile contained within each chapter directory to rebuild after making any changes. On the command line, simply navigate to the chapter directory and enter `make`. See the Makefile for convenient watch targets.
 
-Building requires you to install Node.js, npm, CoffeeScript, and Eco. See the [Setup and Structure](http://www.scriptybooks.com/books/backbone-coffeescript/chapters/application-structure) chapter for installation instructions.
+Building requires you to install [Node.js](http://nodejs.org/), [npm](https://npmjs.org/), [CoffeeScript](http://jashkenas.github.com/coffee-script/#installation), and [Eco](https://github.com/sstephenson/eco). See the [Setup and Structure](http://www.scriptybooks.com/books/backbone-coffeescript/chapters/application-structure) chapter for installation instructions.
 
 ## Tests
 
-You can run the browser-based [Mocha]() tests by opening the test/index.html page contained within each chapter directory. Running the tests should not require any external dependencies.
+You can run the browser-based [Mocha](http://visionmedia.github.com/mocha/)/[Chai](http://chaijs.com) tests by opening the `test/index.html` page contained within each chapter directory. Running the tests should not require any external dependencies.
 
 ## License
 

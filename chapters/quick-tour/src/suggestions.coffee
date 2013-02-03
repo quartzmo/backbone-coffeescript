@@ -23,23 +23,10 @@ root.ShowView = Backbone.View.extend
 
 root.IndexView = Backbone.View.extend
 
-  template: '''
-    <ol>
-      <%= @collection.each (item) ->: %>
-        <li>
-          <a href="#/show/<%= item.id %>">
-            <%= item.get('subject') %>
-          </a>
-        </li>
-      <% end %>
-    </ol>
-    <a href="#/new" class="btn btn-primary">
-      New Suggestion
-    </a>
-  '''
+  template: JST['suggestions/index']
 
   render: ->
-    @$el.html eco.render(@template, this)
+    @$el.html @template(this)
     this
 
 root.NewView = Backbone.View.extend
@@ -47,23 +34,7 @@ root.NewView = Backbone.View.extend
   events:
     'click #new-submit': 'create'
 
-  template: '''
-    <div class="alert alert-error" style="display: none;"></div>
-    <label for="subject">
-      Subject
-    </label>
-    <input id="subject" class="controls" type="text">
-    <label for="message">
-      Message
-    </label>
-    <textarea id="message" class="controls" rows="6"></textarea>
-    <a href="#" class="btn">
-      Cancel
-    </a>
-    <a id="new-submit" class="btn btn-primary">
-      Submit
-    </a>
-  '''
+  template: JST['suggestions/new']
 
   render: ->
     @$el.html @template

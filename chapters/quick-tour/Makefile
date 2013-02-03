@@ -1,4 +1,7 @@
-all: build test-build
+all: template-build build test-build
+
+template-build:
+	eco -o lib/templates src/templates
 
 build:
 	coffee -c -o lib src
@@ -12,4 +15,4 @@ watch:
 test-watch:
 	coffee -o test/lib -cw test/src
 
-.PHONY: build test-build clean watch test-watch
+.PHONY: template-build build test-build clean watch test-watch

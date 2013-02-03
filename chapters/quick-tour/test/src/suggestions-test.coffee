@@ -1,4 +1,3 @@
-
 describe 'Quick Tour', ->
 
   describe "Backbone.Model", ->

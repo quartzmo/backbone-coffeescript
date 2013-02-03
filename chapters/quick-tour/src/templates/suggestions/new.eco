@@ -1,0 +1,15 @@
+<div class="alert alert-error" style="display: none;"></div>
+<label for="subject">
+  Subject
+</label>
+<input id="subject" class="controls" type="text">
+<label for="message">
+  Message
+</label>
+<textarea id="message" class="controls" rows="6"></textarea>
+<a href="#" class="btn">
+  Cancel
+</a>
+<a id="new-submit" class="btn btn-primary">
+  Submit
+</a>

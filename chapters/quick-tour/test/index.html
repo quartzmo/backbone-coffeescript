@@ -13,7 +13,12 @@
     <script src="../../../vendor/js/chai.js"></script>
     <script src="../../../vendor/js/sinon.js"></script>
 
-    <script>
+    <!-- Source templates -->
+    <script src="../lib/templates/suggestions/index.js"></script>
+    <script src="../lib/templates/suggestions/new.js"></script>
+
+    <script type="text/javascript">
+        JST = ecoTemplates;
         chai.should();
         mocha.setup('bdd');
         $(function () {
@@ -29,10 +34,12 @@
     <script src="../../../vendor/js/coffee-script.js"></script>
     <script src="../../../vendor/js/eco.js"></script>
 
-    <!-- include source files here... -->
+    <!-- Sources -->
+    <script src="../lib/templates/suggestions/index.js"></script>
+    <script src="../lib/templates/suggestions/new.js"></script>
     <script src="../lib/suggestions.js"></script>
 
-    <!-- include test files here... -->
+    <!-- Tests -->
     <script src="lib/suggestions-test.js"></script>
 
 </head>

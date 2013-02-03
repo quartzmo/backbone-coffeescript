@@ -18,9 +18,9 @@
   });
 
   root.IndexView = Backbone.View.extend({
-    template: '<ol>\n  <%= @collection.each (item) ->: %>\n    <li>\n      <a href="#/show/<%= item.id %>">\n        <%= item.get(\'subject\') %>\n      </a>\n    </li>\n  <% end %>\n</ol>\n<a href="#/new" class="btn btn-primary">\n  New Suggestion\n</a>',
+    template: JST['suggestions/index'],
     render: function() {
-      this.$el.html(eco.render(this.template, this));
+      this.$el.html(this.template(this));
       return this;
     }
   });
@@ -29,7 +29,7 @@
     events: {
       'click #new-submit': 'create'
     },
-    template: '<div class="alert alert-error" style="display: none;"></div>\n<label for="subject">\n  Subject\n</label>\n<input id="subject" class="controls" type="text">\n<label for="message">\n  Message\n</label>\n<textarea id="message" class="controls" rows="6"></textarea>\n<a href="#" class="btn">\n  Cancel\n</a>\n<a id="new-submit" class="btn btn-primary">\n  Submit\n</a>',
+    template: JST['suggestions/new'],
     render: function() {
       this.$el.html(this.template);
       return this;

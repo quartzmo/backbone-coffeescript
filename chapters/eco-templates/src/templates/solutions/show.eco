@@ -1,0 +1,9 @@
+<% if @solution.has 'correct': %>
+  <div class="alert alert-success">
+    Your answer was <%= if @solution.get 'correct' then 'correct' else 'incorrect' %>.
+  </div>
+<% else: %>
+  <div class="alert alert-error">
+    You need to choose an answer.
+  </div>
+<% end %>

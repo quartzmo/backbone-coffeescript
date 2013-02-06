@@ -1,0 +1,4 @@
+<div>
+  The length of the quiz, if it exists:
+  <%= @exercises?.length %>
+</div>

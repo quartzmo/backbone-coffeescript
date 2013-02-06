@@ -1,0 +1,6 @@
+<div class="well">
+  <%= @formFor @project, (form) => %>
+    <label>Name:</label>
+    <%= form.textField "name" %>
+  <% end %>
+</div>

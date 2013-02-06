@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ScriptyBooks: Backbone + CoffeeScript - Quick Tour Tests</title>
+    <title>ScriptyBooks: Backbone + CoffeeScript - Views and Events Tests</title>
 
     <!-- Test dependencies -->
     <link rel="stylesheet" href="../../../vendor/css/mocha.css"/>
@@ -14,11 +14,12 @@
     <script src="../../../vendor/js/sinon.js"></script>
 
     <!-- Source templates -->
-    <script src="../lib/templates/suggestions/index.js"></script>
-    <script src="../lib/templates/suggestions/new.js"></script>
+    <script src="../lib/templates/choices/show.js"></script>
+    <script src="../lib/templates/exercises/index.js"></script>
 
     <script type="text/javascript">
         JST = ecoTemplates;
+        expect = chai.expect;
         chai.should();
         mocha.setup('bdd');
         $(function () {
@@ -35,10 +36,10 @@
     <script src="../../../vendor/js/eco.js"></script>
 
     <!-- Sources -->
-    <script src="../lib/suggestions.js"></script>
+    <script src="../lib/quiz.js"></script>
 
     <!-- Tests -->
-    <script src="lib/suggestions-test.js"></script>
+    <script src="lib/quiz-test.js"></script>
 
 </head>
 <body>

@@ -33,8 +33,8 @@ describe 'Quick Tour', ->
   describe "ShowView", ->
 
     beforeEach ->
-      suggestion = new Backbone.Model subject: "Hello", message: "I am a Model."
-      @showView = new ShowView model: suggestion
+      @suggestion = new Backbone.Model subject: "Hello", message: "I am a Model."
+      @showView = new ShowView model: @suggestion
 
     describe "el", ->
 
@@ -44,10 +44,10 @@ describe 'Quick Tour', ->
     describe "render", ->
 
       it "should include the subject from the model", ->
-        @showView.render().el.outerHTML.should.match /Hello/
+        @showView.render().$el.html().should.match /Hello/               # Using jQuery
 
       it "should include the message from the model", ->
-        @showView.render().el.outerHTML.should.match /I am a Model./
+        @showView.render().el.outerHTML.should.match /I am a Model./     # Without jQuery
 
 
   describe "IndexView", ->

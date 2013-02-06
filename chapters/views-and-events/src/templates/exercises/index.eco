@@ -1,0 +1,7 @@
+<label class="control-label"><%= @exercise.get 'body' %></label>
+<div class="form-actions">
+  <input type="submit" class="btn btn-primary" value="Submit">
+  <input type="button" class="btn" value="Next">
+  <input type="button" class="btn btn-danger" value="Done">
+  <span class="notice"></span>
+</div>

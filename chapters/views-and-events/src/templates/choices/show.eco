@@ -1,0 +1,1 @@
+<input type="radio" name="choices" value="<%= @choice.id %>"><%= @choice.get 'body' %>

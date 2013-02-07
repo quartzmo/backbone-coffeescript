@@ -24,7 +24,7 @@
         $(function () {
             mocha
                     .run()
-                    .globals(['Backbone']) // acceptable globals
+                    .globals(['_', '$', 'jQuery*', 'Backbone', 'JST']) // acceptable globals
         })
     </script>
 

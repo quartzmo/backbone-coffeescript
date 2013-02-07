@@ -1,4 +1,4 @@
-describe 'Views and Events', ->
+describe 'Routers and History', ->
 
   before ->
 

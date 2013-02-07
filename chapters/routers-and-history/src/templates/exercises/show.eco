@@ -1,0 +1,10 @@
+<label class="control-label"><%= @exercise.get 'body' %></label>
+<div class="form-actions">
+  <input type="submit" class="btn btn-primary" value="Submit">
+  <% if @next: %>
+    <a href="#exercises/<%= @next.id %>" class="btn">Next</a>
+  <% else: %>
+    <input type="button" class="btn" disabled="disabled" value="Next">
+  <% end %>
+  <span class="notice"></span>
+</div>

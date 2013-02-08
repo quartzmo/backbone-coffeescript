@@ -1,0 +1,24 @@
+.modal-header a.close {
+  font-size: 2em;
+  opacity: 0.5;
+}
+
+div.alert-well {
+  color: inherit;
+  background-color: #f5f5f5;
+  border: 1px solid #EEE;
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+a.suggestions-modal-btn {
+  position: fixed;
+  right: 0.5%;
+  top: 50%;
+}
+
+div.modal input[type="text"], div.modal textarea {
+  width: 100%;
+}

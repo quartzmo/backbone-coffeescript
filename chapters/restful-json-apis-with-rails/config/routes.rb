@@ -3,6 +3,21 @@ RailsServer::Application.routes.draw do
 
   resources :suggestions
 
+  # API
+  namespace :api do
+    namespace :feedback do
+      resources :suggestions
+    end
+
+    #namespace :practice do
+    #  resources :choices, only: [:index, :show]
+    #  resources :exercises, only: [:index, :show]
+    #  resources :lessons, only: [:index, :show]
+    #  resources :scores, only: [:show, :create, :update, :destroy]
+    #  resources :solutions, only: [:index, :show, :create, :update, :destroy]
+    #end
+  end
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,9 +1,24 @@
-<h1>Suggestions</h1>
-<div id="suggestions"></div>
+<div id="chapters-modal" class="modal" style="display: none;">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3 class="modal-title">Feedback</h3>
+  </div>
+  <div class="modal-content"></div>
+</div>
+<a class="suggestions-modal-btn btn btn-info" data-toggle="modal" href="#chapters-modal" style="display: none;">Feedback</a>
+
 <% content_for(:inline_javascript) do %>
   <script>
-    var suggestions = new Feedback.Suggestions;
-    suggestions.reset(<%= json_escape @suggestions.to_json.html_safe %>);
-    $('#suggestions').html(new Feedback.IndexView({collection: suggestions}).render().el);
+      $(function() {
+
+        var suggestions = new Suggestions;
+        suggestions.reset(<%= json_escape @suggestions.to_json.html_safe %>);
+        new App(suggestions);
+        Backbone.history.start();
+
+        $('.suggestions-modal-btn').show();
+
+      });
+
   </script>
 <% end %>

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>ScriptyBooks: Backbone + CoffeeScript - Eco Templates Tests</title>
+
+    <!-- Test dependencies -->
+    <link rel="stylesheet" href="../../../vendor/css/mocha.css"/>
+
+    <script src="../../../vendor/js/jquery-1.9.0.js"></script>
+    <script src="../../../vendor/js/mocha.js"></script>
+    <script src="../../../vendor/js/chai.js"></script>
+    <script src="../../../vendor/js/sinon.js"></script>
+
+    <!-- Source dependencies -->
+    <script src="../../../vendor/js/underscore.js"></script>
+    <script src="../../../vendor/js/backbone.js"></script>
+    <script src="../../../vendor/js/coffee-script.js"></script>
+    <script src="../../../vendor/js/eco.js"></script>
+    <script src="../../../vendor/js/moment.js"></script>
+    <script src="../../../vendor/js/accounting.js"></script>
+    <script src="../../../vendor/js/underscore.string.js"></script>
+
+    <!-- Source templates -->
+    <script src="../lib/templates/exercises/index.js"></script>
+    <script src="../lib/templates/exercises/new.js"></script>
+    <script src="../lib/templates/solutions/show.js"></script>
+
+    <script type="text/javascript">
+        JST = ecoTemplates;
+        expect = chai.expect;
+        chai.should();
+        mocha.setup('bdd');
+        $(function () {
+            mocha
+                    .run()
+                    .globals(['_', '$', 'jQuery*', 'Backbone', 'JST', 'ViewHelpers']) // acceptable globals
+        })
+    </script>
+
+    <!-- Tests -->
+    <script src="lib/eco-test.js"></script>
+
+</head>
+<body>
+    <div id="mocha"></div>
+
+    <!-- Compiled to JST['underscore/exercises/index'] in test-->
+    <script type="text/template" id="underscore-exercises-index">
+        <div>
+            The length of the quiz, if it exists:
+            <% if (typeof exercises !== 'undefined' && exercises !== null) print(exercises.length) %>
+        </div>
+    </script>
+
+
+</body>
+</html>

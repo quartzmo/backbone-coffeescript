@@ -6,30 +6,37 @@
       return this.json = {
         "choices": [
           {
+            "id": 1,
             "exercise_id": 1,
             "position": 1,
             "body": "Model"
           }, {
+            "id": 2,
             "exercise_id": 1,
             "position": 2,
             "body": "View"
           }, {
+            "id": 3,
             "exercise_id": 1,
             "position": 3,
             "body": "Controller"
           }, {
+            "id": 4,
             "exercise_id": 1,
             "position": 4,
             "body": "None of the above"
           }, {
+            "id": 5,
             "exercise_id": 2,
             "position": 1,
             "body": "Underscore"
           }, {
+            "id": 6,
             "exercise_id": 2,
             "position": 2,
             "body": "Handlebars"
           }, {
+            "id": 8,
             "exercise_id": 2,
             "position": 4,
             "body": "All of the above"
@@ -39,12 +46,41 @@
     });
     describe("Backbone.Collection", function() {
       return describe("add", function() {
-        return it("should create an instance of Backbone.Model", function() {
+        it("should insert an instance of Backbone.Model", function() {
           var collection;
           collection = new Backbone.Collection;
           collection.add({});
           collection.length.should.equal(1);
           return collection.at(0).should.be.an.instanceOf(Backbone.Model);
+        });
+        it("should insert two logically equivalent instances", function() {
+          var collection;
+          collection = new Backbone.Collection;
+          collection.add({
+            email: 'fred@example.com'
+          });
+          collection.add(new Backbone.Model({
+            email: 'fred@example.com'
+          }));
+          return collection.length.should.equal(2);
+        });
+        return it("should not insert a duplicate entity based on id", function() {
+          var collection;
+          collection = new Backbone.Collection;
+          collection.add({
+            id: 1,
+            email: 'fred@example.com',
+            name: 'Fred'
+          });
+          collection.add({
+            id: 1,
+            email: 'fred@example.com',
+            name: 'Frederick'
+          }, {
+            merge: true
+          });
+          collection.length.should.equal(1);
+          return collection.at(0).get('name').should.equal('Frederick');
         });
       });
     });
@@ -59,7 +95,25 @@
         });
       });
     });
-    return describe("Backbone.Collection", function() {
+    describe("Backbone.Collection", function() {
+      describe("push", function() {
+        var collection, popped, pushed;
+        collection = new Backbone.Collection;
+        pushed = collection.push({});
+        collection.length.should.equal(1);
+        popped = collection.pop();
+        popped.should.equal(pushed);
+        return collection.isEmpty().should.be["true"];
+      });
+      return describe("remove", function() {
+        var collection;
+        collection = new Backbone.Collection;
+        collection.add({});
+        collection.remove(collection.last());
+        return collection.isEmpty().should.be["true"];
+      });
+    });
+    describe("Backbone.Collection", function() {
       beforeEach(function() {
         return this.collection = new Backbone.Collection(this.json.choices);
       });
@@ -68,54 +122,90 @@
           return this.collection.length.should.equal(7);
         });
       });
-      describe("at", function() {
+      return describe("at", function() {
         return it("should return models in the same order as the original JSON", function() {
           var first;
           first = this.collection.at(0);
+          first.get('id').should.equal(1);
           first.get('exercise_id').should.equal(1);
           return first.get('position').should.equal(1);
         });
       });
-      describe("push", function() {
-        return it("should return the created model", function() {
-          var popped, pushed;
-          pushed = this.collection.push({
-            exercise_id: 2,
-            position: 5,
-            body: "None of the above"
-          });
-          this.collection.length.should.equal(8);
-          popped = this.collection.pop();
-          popped.should.equal(pushed);
-          return this.collection.length.should.equal(7);
+    });
+    describe("Backbone.Collection", function() {
+      describe("add", function() {
+        return it("should add all models from an array", function() {
+          var collection;
+          collection = new Backbone.Collection([
+            {
+              id: 1
+            }, {
+              id: 2
+            }
+          ]);
+          collection.add([
+            {
+              id: 3
+            }, {
+              id: 4
+            }
+          ]);
+          return collection.length.should.equal(4);
         });
       });
       describe("reset", function() {
         return it("should replace the existing models", function() {
-          this.collection.reset();
-          this.collection.length.should.equal(0);
-          this.collection.reset(this.json.choices);
-          return this.collection.length.should.equal(7);
-        });
-      });
-      describe("add", function() {
-        return it("should add all models from an array", function() {
-          this.collection.add([
+          var collection;
+          collection = new Backbone.Collection([
             {
-              exercise_id: 2,
-              position: 3,
-              body: "JSP"
+              id: 1
             }, {
-              exercise_id: 2,
-              position: 5,
-              body: "None of the above"
+              id: 2
             }
           ]);
-          this.collection.length.should.equal(9);
-          this.collection.at(6).get('position').should.equal(4);
-          this.collection.at(7).get('position').should.equal(3);
-          return this.collection.at(8).get('position').should.equal(5);
+          collection.reset();
+          collection.length.should.equal(0);
+          collection.reset([
+            {
+              id: 2
+            }, {
+              id: 3
+            }
+          ]);
+          return collection.length.should.equal(2);
         });
+      });
+      return describe("set", function() {
+        return it("should smart-update the existing model set", function() {
+          var collection, keeper;
+          keeper = new Backbone.Model({
+            id: 2,
+            position: 2
+          });
+          collection = new Backbone.Collection([
+            {
+              id: 1,
+              position: 1
+            }, keeper
+          ]);
+          collection.set([
+            {
+              id: 2,
+              position: 1
+            }, {
+              id: 3,
+              position: 3
+            }
+          ]);
+          collection.first().id.should.equal(2);
+          collection.first().get('position').should.equal(1);
+          return collection.first().should.equal(keeper);
+        });
+      });
+    });
+    return describe("Backbone.Collection", function() {
+      beforeEach(function() {
+        return this.collection = new Backbone.Collection(this.json.choices);
       });
       describe("comparator (model)", function() {
         return it("should enable custom ordering by a single attribute", function() {

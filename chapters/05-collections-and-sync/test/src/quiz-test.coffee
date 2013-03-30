@@ -6,13 +6,13 @@ describe 'Collections and Sync', ->
 
       "choices": [
 
-        { "exercise_id": 1, "position": 1, "body": "Model"              },
-        { "exercise_id": 1, "position": 2, "body": "View"               },
-        { "exercise_id": 1, "position": 3, "body": "Controller"         },
-        { "exercise_id": 1, "position": 4, "body": "None of the above"  },
-        { "exercise_id": 2, "position": 1, "body": "Underscore"         },
-        { "exercise_id": 2, "position": 2, "body": "Handlebars"         },
-        { "exercise_id": 2, "position": 4, "body": "All of the above"   }
+        { "id": 1, "exercise_id": 1, "position": 1, "body": "Model"              },
+        { "id": 2, "exercise_id": 1, "position": 2, "body": "View"               },
+        { "id": 3, "exercise_id": 1, "position": 3, "body": "Controller"         },
+        { "id": 4, "exercise_id": 1, "position": 4, "body": "None of the above"  },
+        { "id": 5, "exercise_id": 2, "position": 1, "body": "Underscore"         },
+        { "id": 6, "exercise_id": 2, "position": 2, "body": "Handlebars"         },
+        { "id": 8, "exercise_id": 2, "position": 4, "body": "All of the above"   }
 
       ]
     }
@@ -21,7 +21,7 @@ describe 'Collections and Sync', ->
 
     describe "add", ->
 
-      it "should create an instance of Backbone.Model", ->
+      it "should insert an instance of Backbone.Model", ->
 
         collection = new Backbone.Collection
 
@@ -29,6 +29,25 @@ describe 'Collections and Sync', ->
 
         collection.length.should.equal 1
         collection.at(0).should.be.an.instanceOf Backbone.Model
+
+      it "should insert two logically equivalent instances", ->
+
+        collection = new Backbone.Collection
+
+        collection.add email: 'fred@example.com'
+        collection.add new Backbone.Model email: 'fred@example.com'
+
+        collection.length.should.equal 2
+
+      it "should not insert a duplicate entity based on id", ->
+
+        collection = new Backbone.Collection
+
+        collection.add id: 1, email: 'fred@example.com', name: 'Fred'
+        collection.add { id: 1, email: 'fred@example.com', name: 'Frederick' }, merge: true
+
+        collection.length.should.equal 1
+        collection.at(0).get('name').should.equal 'Frederick'
 
   describe "Scores", ->
 
@@ -42,6 +61,33 @@ describe 'Collections and Sync', ->
 
         scores.at(0).should.be.an.instanceOf Score
         scores.at(0).get('points').should.equal 0
+
+  describe "Backbone.Collection", ->
+
+    describe "push", ->
+
+      collection = new Backbone.Collection
+
+      pushed = collection.push {}
+
+      collection.length.should.equal 1
+
+      popped = collection.pop()
+
+      popped.should.equal pushed
+
+      collection.isEmpty().should.be.true
+
+    describe "remove", ->
+
+      collection = new Backbone.Collection
+
+      collection.add {}
+
+      collection.remove collection.last()
+
+      collection.isEmpty().should.be.true
+
 
   describe "Backbone.Collection", ->
 
@@ -60,49 +106,56 @@ describe 'Collections and Sync', ->
 
         first = @collection.at(0)
 
+        first.get('id').should.equal 1
         first.get('exercise_id').should.equal 1
         first.get('position').should.equal 1
 
-    describe "push", ->
-
-      it "should return the created model", ->
-
-        pushed = @collection.push exercise_id: 2, position: 5, body: "None of the above"
-
-        @collection.length.should.equal 8
-
-        popped = @collection.pop()
-
-        popped.should.equal pushed
-
-        @collection.length.should.equal 7
-
-    describe "reset", ->
-
-      it "should replace the existing models", ->
-
-        @collection.reset()
-
-        @collection.length.should.equal 0
-
-        @collection.reset @json.choices
-
-        @collection.length.should.equal 7
+  describe "Backbone.Collection", ->
 
     describe "add", ->
 
       it "should add all models from an array", ->
 
-        @collection.add [
-          { exercise_id: 2, position: 3, body: "JSP" }
-          { exercise_id: 2, position: 5, body: "None of the above" }
-        ]
+        collection = new Backbone.Collection [ { id: 1 }, { id: 2 } ]
 
-        @collection.length.should.equal 9
+        collection.add [ { id: 3 }, { id: 4 } ]
 
-        @collection.at(6).get('position').should.equal 4
-        @collection.at(7).get('position').should.equal 3
-        @collection.at(8).get('position').should.equal 5
+        collection.length.should.equal 4
+
+    describe "reset", ->
+
+      it "should replace the existing models", ->
+
+        collection = new Backbone.Collection [ { id: 1 }, { id: 2 } ]
+
+        collection.reset()
+
+        collection.length.should.equal 0
+
+        collection.reset [ { id: 2 }, { id: 3 } ]
+
+        collection.length.should.equal 2
+
+    describe "set", ->
+
+      it "should smart-update the existing model set", ->
+
+        keeper = new Backbone.Model id: 2, position: 2
+
+        collection = new Backbone.Collection [ { id: 1, position: 1 }, keeper ]
+
+        collection.set [ { id: 2, position: 1 }, { id: 3, position: 3 } ]
+
+        collection.first().id.should.equal 2
+        collection.first().get('position').should.equal 1
+
+        collection.first().should.equal keeper
+
+
+  describe "Backbone.Collection", ->
+
+    beforeEach ->
+      @collection = new Backbone.Collection @json.choices
 
     describe "comparator (model)", ->
 

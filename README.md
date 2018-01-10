@@ -11,7 +11,7 @@ Building requires you to install [Node.js](http://nodejs.org/), [npm](https://np
 
 ## Tests
 
-You can run the browser-based [Mocha](http://visionmedia.github.com/mocha/)/[Chai](http://chaijs.com) tests by opening the `test/index.html` page contained within each chapter directory. Running the tests should not require any external dependencies.
+You can run the browser-based [Mocha](http://mochajs.org/)/[Chai](http://chaijs.com) tests by opening the `test/index.html` page contained within each chapter directory. Running the tests should not require any external dependencies.
 
 ## License
 
